@@ -9,7 +9,7 @@
   });
 </script>
 
-<section class="mx-2 my-20 md:mx-5 xl:mx-20">
+<section id={listName} class="mx-2 my-20 md:mx-5 xl:mx-20">
   <h1 class="text-xl mb-5">
     <span class="text-red-500 font-bold">const</span>
     <span class="font-bold"> {listName} </span>

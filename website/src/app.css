@@ -5,3 +5,7 @@
 body {
   @apply bg-stone-200;
 }
+
+html {
+  scroll-behavior: smooth;
+}

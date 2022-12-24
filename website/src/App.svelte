@@ -1,25 +1,47 @@
 <script lang="ts">
   import { loginWithGitHub } from "./lib/firebase";
-  import FunctionHero from "./components/FunctionHero.svelte";
+
+  import NavBar from "./components/NavBar.svelte";
   import ListSection from "./components/ListSection.svelte";
+  import FunctionHero from "./components/FunctionHero.svelte";
+
+  const navLinks = [
+    {
+      name: "Home",
+      href: "#",
+    },
+    {
+      name: "Features",
+      href: "#features",
+    },
+    {
+      name: "Challenges",
+      href: "#challengeTypes",
+    },
+    {
+      name: "How does it work?",
+      href: "#explain",
+    },
+  ];
 
   const features = [
     {
       name: "Language Independent",
       icon: "🌐",
       description:
-        "Write your code in any language you want. We support over 20 languages.",
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, accusantium!",
     },
     {
       name: "Open Source",
       icon: "📖",
       description:
-        "We are open source and always will be. You can contribute to the project on GitHub.",
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, accusantium!",
     },
     {
       name: "Helps You Learn",
       icon: "📚",
-      description: "We help you learn by providing you with a code playground.",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, accusantium!",
     },
   ];
 
@@ -52,6 +74,8 @@
 </script>
 
 <main class="font-mono">
+  <NavBar links={navLinks} />
+
   <FunctionHero
     name="CodeNightDevChallenges"
     msg="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio nulla
@@ -64,7 +88,8 @@
   <ListSection listName="challengeTypes" list={challengeTypes} />
 
   <h1
-    class="mx-2 mt-10 mb-5 md:mx-5 xl:mx-20 text-2xl md:text-4xl font-extrabold"
+    id="explain"
+    class="mx-2 mt-10 mb-5 md:mx-5 xl:mx-20 text-xl md:text-4xl font-extrabold"
   >
     <span class="font-bold text-red-500">explain</span>(<span
       >"How it works"</span
