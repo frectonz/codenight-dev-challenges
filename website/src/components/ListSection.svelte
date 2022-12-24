@@ -29,7 +29,7 @@
         {#each element as pair}
           <p class="ml-5">
             <span class="text-red-500 font-bold">{pair.key}</span> :
-            <span class="font-bold">"{pair.value}"</span>
+            <span class="font-bold">"{pair.value}"</span>,
           </p>
         {/each}
 
