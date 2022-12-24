@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Link } from "../lib/types";
   export let links: Link[];
+  export let avatarUrl: string | undefined = undefined;
 </script>
 
 <header
@@ -22,5 +23,9 @@
         >
       {/if}
     {/each}
+
+    {#if avatarUrl}
+      <img src={avatarUrl} alt="avatar" class="w-10 h-10 rounded-full" />
+    {/if}
   </nav>
 </header>

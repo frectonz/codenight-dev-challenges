@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@rgossiaux/svelte-headlessui": "^1.0.2",
-    "firebase": "^9.15.0"
+    "firebase": "^9.15.0",
+    "svelte-icons": "^2.1.0"
   }
 }
