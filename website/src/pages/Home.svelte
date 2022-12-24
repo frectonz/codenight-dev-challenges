@@ -1,24 +1,29 @@
 <script lang="ts">
+  import type { Link } from "../lib/types";
   import { loginWithGitHub } from "../lib/firebase";
 
   import NavBar from "../components/NavBar.svelte";
   import ListSection from "../components/ListSection.svelte";
   import FunctionHero from "../components/FunctionHero.svelte";
 
-  const navLinks = [
+  const navLinks: Link[] = [
     {
+      type: "link",
       name: "Home",
       href: "#",
     },
     {
+      type: "link",
       name: "Features",
       href: "#features",
     },
     {
+      type: "link",
       name: "Challenges",
       href: "#challengeTypes",
     },
     {
+      type: "link",
       name: "How does it work?",
       href: "#explain",
     },

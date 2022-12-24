@@ -5,7 +5,6 @@
   import Dashboard from "./pages/Dashboard.svelte";
 
   auth.onAuthStateChanged((u) => {
-    console.log(u);
     $user = u;
   });
 </script>
