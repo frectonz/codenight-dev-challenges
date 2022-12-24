@@ -11,8 +11,9 @@
   >
     <div class="flex flex-col gap-2 text-lg">
       <h1 class="font-bold text-xl">
-        <span class="text-red-500">function</span> <span>{name}</span>
-        <span class="text-red-500">{"{"}</span>
+        <span class="text-red-500">function</span> <span>{name}</span>()<span
+          class="text-red-500">{" {"}</span
+        >
       </h1>
 
       <p class="ml-5">
