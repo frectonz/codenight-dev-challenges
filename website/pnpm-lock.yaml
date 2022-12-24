@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@rgossiaux/svelte-headlessui': ^1.0.2
+  '@rgossiaux/svelte-heroicons': ^0.1.2
   '@sveltejs/vite-plugin-svelte': ^2.0.0
   '@tsconfig/svelte': ^3.0.0
   autoprefixer: ^10.4.13
@@ -9,7 +10,6 @@ specifiers:
   postcss: ^8.4.20
   svelte: ^3.54.0
   svelte-check: ^2.10.0
-  svelte-icons: ^2.1.0
   tailwindcss: ^3.2.4
   tslib: ^2.4.1
   typescript: ^4.9.3
@@ -17,8 +17,8 @@ specifiers:
 
 dependencies:
   '@rgossiaux/svelte-headlessui': 1.0.2_svelte@3.55.0
+  '@rgossiaux/svelte-heroicons': 0.1.2_svelte@3.55.0
   firebase: 9.15.0
-  svelte-icons: 2.1.0
 
 devDependencies:
   '@sveltejs/vite-plugin-svelte': 2.0.2_svelte@3.55.0+vite@4.0.3
@@ -807,6 +807,14 @@ packages:
 
   /@rgossiaux/svelte-headlessui/1.0.2_svelte@3.55.0:
     resolution: {integrity: sha512-sauopYTSivhzXe1kAvgawkhyYJcQlK8Li3p0d2OtcCIVprOzdbard5lbqWB4xHDv83zAobt2mR08oizO2poHLQ==}
+    peerDependencies:
+      svelte: ^3.44.0
+    dependencies:
+      svelte: 3.55.0
+    dev: false
+
+  /@rgossiaux/svelte-heroicons/0.1.2_svelte@3.55.0:
+    resolution: {integrity: sha512-c5Ep1QDvBo9HD/P0AxbXItDbn6x77fldCjjL0aBjNseUntV4fkdHkBde1IaLr8i0kmrhTSovjkIen8W83jUPzg==}
     peerDependencies:
       svelte: ^3.44.0
     dependencies:
@@ -1716,10 +1724,6 @@ packages:
     dependencies:
       svelte: 3.55.0
     dev: true
-
-  /svelte-icons/2.1.0:
-    resolution: {integrity: sha512-rHPQjweEc9fGSnvM0/4gA3pDHwyZyYsC5KhttCZRhSMJfLttJST5Uq0B16Czhw+HQ+HbSOk8kLigMlPs7gZtfg==}
-    dev: false
 
   /svelte-preprocess/4.10.7_uldce6htlskfyklq5y55tk7pdy:
     resolution: {integrity: sha512-sNPBnqYD6FnmdBrUmBCaqS00RyCsCpj2BG58A1JBswNF7b0OKviwxqVrOL/CKyJrLSClrSeqQv5BXNg2RUbPOw==}

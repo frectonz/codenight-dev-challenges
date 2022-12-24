@@ -12,8 +12,14 @@
     TabGroup,
     TabPanel,
     TabPanels,
+    Disclosure,
+    DisclosureButton,
+    DisclosurePanel,
   } from "@rgossiaux/svelte-headlessui";
-  import GoArrowUp from "svelte-icons/go/GoArrowUp.svelte";
+  import {
+    ChevronRightIcon,
+    ArrowCircleUpIcon,
+  } from "@rgossiaux/svelte-heroicons/solid";
 
   const navLinks: Link[] = [
     {
@@ -66,14 +72,69 @@
   <TabPanels class="p-4 border border-black">
     <TabPanel>
       <FunctionContainer name="challenges">
+        <Disclosure class="border border-black p-2 mt-4" let:open>
+          <DisclosureButton
+            class="flex justify-between items-center w-full bg-black text-white px-4 py-2"
+            >Create Challenge
+
+            <ChevronRightIcon
+              class="w-8 h-8"
+              style={open ? "transform: rotate(90deg);" : ""}
+            />
+          </DisclosureButton>
+
+          <DisclosurePanel class="mt-4 grid grid-cols-1 gap-3">
+            <h1>
+              <span class="text-red-500 font-bold">const</span>
+              <span>challenge</span>
+              <span> = </span>
+              <span class="font-bold text-red-500">{"{"}</span>
+            </h1>
+
+            <div class="ml-5">
+              <span class="font-bold">title</span>
+              <span>: </span>"<input
+                type="text"
+                class="bg-transparent border border-black w-[70%] outline-none p-1"
+              />",
+            </div>
+
+            <div class="ml-5 flex items-start">
+              <span class="font-bold">description</span>
+              <span class="mr-4">:</span>
+              <span>"</span>
+              <textarea
+                type="text"
+                rows="5"
+                class="bg-transparent border border-black w-[70%] outline-none p-1"
+              />
+              <span>",</span>
+            </div>
+
+            <div class="ml-5 flex items-start">
+              <span class="font-bold">image?</span>
+              <span class="mr-4">:</span>
+              <span>"</span>
+              <input type="file" accept="image/*" />
+              <span>",</span>
+            </div>
+
+            <h1><span class="text-red-500">{"}"}</span>;</h1>
+
+            <button class="bg-black text-white px-4 py-2 mt-4 hover:scale-95">
+              <span class="text-red-500 font-bold">submitChallenge</span>(<span
+                >challenge</span
+              >);
+            </button>
+          </DisclosurePanel>
+        </Disclosure>
+
         {#each challenges as challenge}
           <div
             class="p-2 md:p-4 flex flex-col md:flex-row gap-5 border border-black my-5"
           >
-            <button
-              class="w-10 h-10 bg-black text-red-500 rounded-sm md:mb-auto hover:scale-90"
-            >
-              <GoArrowUp />
+            <button class="w-10 h-10 rounded-sm md:mb-auto hover:scale-90">
+              <ArrowCircleUpIcon />
             </button>
             <img class="w-fit" src={challenge.image} alt="" />
 
@@ -107,7 +168,7 @@
                   "seconds"
                 )}",
               </p>
-              <h1 class="text-red-500 font-bold">{"{"}</h1>
+              <h1 class="text-red-500 font-bold">{"}"}</h1>
             </div>
           </div>
         {/each}
