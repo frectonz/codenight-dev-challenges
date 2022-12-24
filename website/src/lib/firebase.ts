@@ -9,14 +9,14 @@ const firebaseConfig = {
   storageBucket: "codenight-dev-challenges.appspot.com",
   messagingSenderId: "288465614232",
   appId: "1:288465614232:web:9e53c659515801d60467ed",
-  measurementId: "G-YQ3DPD3WFC"
+  measurementId: "G-YQ3DPD3WFC",
 };
 
 export const app = initializeApp(firebaseConfig);
 export const analytics = getAnalytics(app);
-const auth = getAuth(app);
+export const auth = getAuth(app);
 
 export const loginWithGitHub = () => {
   const provider = new GithubAuthProvider();
   return signInWithPopup(auth, provider);
-}
+};
