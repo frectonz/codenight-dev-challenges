@@ -55,7 +55,7 @@
   <span class="text-red-500 font-bold">sayHi</span>("{$user.displayName}");
 </h1>
 
-<TabGroup class="mx-2 md:mx-5">
+<TabGroup class="mx-2 md:mx-5 lg:mx-auto lg:container">
   <TabList class="py-4 grid grid-cols-1 md:grid-cols-3">
     {#each tabs as tab}
       <Tab
