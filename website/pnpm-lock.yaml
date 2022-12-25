@@ -14,11 +14,13 @@ specifiers:
   tslib: ^2.4.1
   typescript: ^4.9.3
   vite: ^4.0.0
+  zod: ^3.20.2
 
 dependencies:
   '@rgossiaux/svelte-headlessui': 1.0.2_svelte@3.55.0
   '@rgossiaux/svelte-heroicons': 0.1.2_svelte@3.55.0
   firebase: 9.15.0
+  zod: 3.20.2
 
 devDependencies:
   '@sveltejs/vite-plugin-svelte': 2.0.2_svelte@3.55.0+vite@4.0.3
@@ -1963,4 +1965,8 @@ packages:
       string-width: 4.2.3
       y18n: 5.0.8
       yargs-parser: 20.2.9
+    dev: false
+
+  /zod/3.20.2:
+    resolution: {integrity: sha512-1MzNQdAvO+54H+EaK5YpyEy0T+Ejo/7YLHS93G3RnYWh5gaotGHwGeN/ZO687qEDU2y4CdStQYXVHIgrUl5UVQ==}
     dev: false

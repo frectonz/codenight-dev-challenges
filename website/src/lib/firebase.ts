@@ -1,7 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore, collection, doc, setDoc } from "firebase/firestore";
 import { getAuth, GithubAuthProvider, signInWithPopup } from "firebase/auth";
+import { getFirestore, collection, doc, setDoc, addDoc } from "firebase/firestore";
+import { getStorage, uploadBytes, ref as storageRef } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBxdasPWGQy17nZEUVcjk0sD2ivhAD1I3w",
@@ -39,8 +40,26 @@ auth.onAuthStateChanged((user) => {
   });
 });
 
-// function getCurrentUser(): User | null {
-//   if (!auth.currentUser) {
-//     return null;
-//   }
-// }
+export async function addChallenge(challenge: {
+  title: string;
+  description: string;
+  difficulty: string;
+}, image: File) {
+  const imagePath = await uploadImage(image);
+  const challengeWithImage = {
+    ...challenge,
+    image: imagePath,
+  }
+
+  const challengesRef = collection(db, "challenges");
+  const docRef = await addDoc(challengesRef, challengeWithImage);
+  console.log("Document written with ID: ", docRef.id);
+}
+
+async function uploadImage(file: File): Promise<string> {
+  const storage = getStorage(app);
+  const imageRef = storageRef(storage, `images/${file.name}-${Date.now()}-${file.size}`);
+  const res = await uploadBytes(imageRef, file);
+  return res.metadata.fullPath;
+}
+
