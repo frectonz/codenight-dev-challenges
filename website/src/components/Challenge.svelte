@@ -1,47 +1,37 @@
 <script lang="ts">
+  import type { ChallengeData } from "../lib/validators";
   import { ArrowCircleUpIcon } from "@rgossiaux/svelte-heroicons/solid";
 
-  export let challenge: {
-    image: string;
-    title: string;
-    description: string;
-    votes: number;
-    claims: number;
-    createdAt: Date;
-  };
-
-  const numberFormatter = new Intl.NumberFormat("en-US");
-  const relativeTimeFormatter = new Intl.RelativeTimeFormat("en-US", {
-    numeric: "auto",
-  });
+  export let challenge: ChallengeData;
 </script>
 
 <div class="p-2 md:p-4 border border-black">
-  <div class="flex flex-col md:flex-row gap-5">
-    <img class="w-fit" src={challenge.image} alt="" />
-    <div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+    <div class="flex justify-center items-center">
+      <img src={challenge.image} class="w-[300px] border border-black" alt="" />
+    </div>
+    <div class="flex flex-col justify-center gap-2">
       <h1 class="text-red-500 font-bold">{"{"}</h1>
-      <p class="ml-5">
-        <span class="font-bold">title</span> : "{challenge.title}",
+      <p class="md:ml-5">
+        <span class="font-bold">title</span> :
+        <span class="break-words">"{challenge.title}"</span>,
       </p>
-      <p class="ml-5">
-        <span class="font-bold">description</span> : "{challenge.description}",
+
+      <p class="md:ml-5">
+        <span class="font-bold">description</span> :
+        <span class="break-words">"{challenge.description}"</span>,
       </p>
-      <p class="ml-5">
-        <span class="font-bold">votes</span> : "{numberFormatter.format(
-          challenge.votes
-        )}",
-      </p>
-      <p class="ml-5">
-        <span class="font-bold">claims</span> : "{numberFormatter.format(
-          challenge.claims
-        )}",
-      </p>
-      <p class="ml-5">
-        <span class="font-bold">created</span> : "{relativeTimeFormatter.format(
-          challenge.createdAt.getTime() - Date.now(),
-          "seconds"
-        )}",
+      <div class="md:ml-5 flex flex-row items-center gap-2 flex-wrap">
+        <span class="font-bold">createdBy</span> :
+        <img
+          src={challenge.createdBy.photoURL}
+          class="w-8 h-8 rounded-full"
+          alt=""
+        />
+        "{challenge.createdBy.name}",
+      </div>
+      <p class="md:ml-5">
+        <span class="font-bold">difficulty</span> : "{challenge.difficulty}",
       </p>
       <h1 class="text-red-500 font-bold">{"}"}</h1>
     </div>

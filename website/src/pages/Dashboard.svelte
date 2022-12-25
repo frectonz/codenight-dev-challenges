@@ -1,11 +1,14 @@
 <script lang="ts">
   import type { Link } from "../lib/types";
+  import type { ChallengeData } from "../lib/validators";
 
   import { user } from "../lib/store";
-  import { auth } from "../lib/firebase";
+  import { auth, getChallenges } from "../lib/firebase";
+  import { validateChallenge } from "../lib/validators";
 
   import NavBar from "../components/NavBar.svelte";
   import Challenge from "../components/Challenge.svelte";
+  import NewChallengeForm from "../components/NewChallengeForm.svelte";
   import FunctionContainer from "../components/FunctionContainer.svelte";
 
   import {
@@ -19,7 +22,6 @@
     DisclosurePanel,
   } from "@rgossiaux/svelte-headlessui";
   import { ChevronRightIcon } from "@rgossiaux/svelte-heroicons/solid";
-  import NewChallengeForm from "../components/NewChallengeForm.svelte";
 
   const navLinks: Link[] = [
     {
@@ -33,35 +35,18 @@
 
   const tabs = ["challenges", "projects", "rewards"];
 
-  const challenges = [
-    {
-      id: "1",
-      title: "Challenge 1",
-      description: "This is a challenge",
-      image: "https://picsum.photos/200",
-      votes: 100,
-      createdAt: new Date(Date.now() - 10000),
-      claims: 24,
-    },
-    {
-      id: "1",
-      title: "Challenge 1",
-      description: "This is a challenge",
-      image: "https://picsum.photos/200",
-      votes: 100,
-      createdAt: new Date(Date.now() - 10000),
-      claims: 24,
-    },
-    {
-      id: "1",
-      title: "Challenge 1",
-      description: "This is a challenge",
-      image: "https://picsum.photos/200",
-      votes: 100,
-      createdAt: new Date(Date.now() - 10000),
-      claims: 24,
-    },
-  ];
+  async function challenges(): Promise<ChallengeData[]> {
+    const challenges = await getChallenges();
+
+    return challenges.map((challenge) => {
+      const res = validateChallenge.safeParse(challenge);
+      if (res.success === false) {
+        return;
+      }
+
+      return res.data;
+    });
+  }
 </script>
 
 <NavBar links={navLinks} avatarUrl={$user.photoURL} />
@@ -81,7 +66,7 @@
       </Tab>
     {/each}
   </TabList>
-  <TabPanels class="p-4 border border-black">
+  <TabPanels class="p-2 md:p-4 border border-black">
     <TabPanel>
       <FunctionContainer name="challenges">
         <Disclosure class="border border-black p-2 mt-4" let:open>
@@ -100,9 +85,11 @@
         </Disclosure>
 
         <section class="grid grid-cols-1 gap-2 mt-5">
-          {#each challenges as challenge}
-            <Challenge {challenge} />
-          {/each}
+          {#await challenges() then challenges}
+            {#each challenges as challenge}
+              <Challenge {challenge} />
+            {/each}
+          {/await}
         </section>
       </FunctionContainer>
     </TabPanel>

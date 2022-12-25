@@ -6,7 +6,7 @@
 
   import FormErrors from "./FormErrors.svelte";
 
-  const challenge = {
+  let challenge = {
     title: "",
     description: "",
     difficulty: "",
@@ -52,6 +52,12 @@
     )
       .then(() => {
         status = "success";
+        files = null;
+        challenge = {
+          title: "",
+          description: "",
+          difficulty: "",
+        };
       })
       .catch((err) => {
         status = "error";
@@ -128,7 +134,13 @@
   <span class="font-bold text-red-500">const</span>
   <span class="font-bold"> status</span>
   <span> = </span>
-  <span>"{status}"</span>
+  <span
+    class={status === "success"
+      ? "text-green-500"
+      : status === "error"
+      ? "text-red-600"
+      : ""}>"{status}"</span
+  >
 </h1>
 
 <button

@@ -8,7 +8,7 @@
     <span class="font-bold">{name}()</span>
     <span class="text-red-500 font-bold">{"{"}</span>
   </h1>
-  <section class="ml-3 md:ml-10">
+  <section class="ml-2 md:ml-10">
     <slot />
   </section>
   <h1 class="text-red-500 font-bold">{"}"}</h1>
