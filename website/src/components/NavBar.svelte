@@ -25,7 +25,11 @@
     {/each}
 
     {#if avatarUrl}
-      <img src={avatarUrl} alt="avatar" class="w-10 h-10 rounded-full" />
+      <img
+        src={avatarUrl}
+        alt="avatar"
+        class="w-10 h-10 rounded-full border border-black"
+      />
     {/if}
   </nav>
 </header>

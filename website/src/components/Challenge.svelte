@@ -2,7 +2,21 @@
   import type { ChallengeData } from "../lib/validators";
   import { ArrowCircleUpIcon } from "@rgossiaux/svelte-heroicons/solid";
 
+  import { upvoteChallenge } from "../lib/firebase";
+
   export let challenge: ChallengeData;
+  let upvoteStatus: "idle" | "loading" | "success" | "error" = "idle";
+
+  function handleUpvote() {
+    upvoteStatus = "loading";
+    upvoteChallenge(challenge.id)
+      .then(() => {
+        upvoteStatus = "success";
+      })
+      .catch(() => {
+        upvoteStatus = "error";
+      });
+  }
 </script>
 
 <div class="p-2 md:p-4 border border-black">
@@ -38,8 +52,23 @@
   </div>
 
   <div class="flex flex-row justify-end">
-    <button class="w-10 h-10 rounded-sm md:mb-auto hover:scale-90">
-      <ArrowCircleUpIcon />
+    <button
+      class="hover:scale-90 flex flex-row gap-2 bg-black px-4 py-1 text-white items-center justify-center uppercase text-sm disabled:opacity-50"
+      on:click={handleUpvote}
+      disabled={upvoteStatus === "loading"}
+    >
+      <span
+        >{upvoteStatus === "loading"
+          ? "Loading..."
+          : upvoteStatus === "success"
+          ? "Success!"
+          : upvoteStatus === "error"
+          ? "Error!"
+          : "Upvote"}</span
+      >
+      <span class="w-8 h-8">
+        <ArrowCircleUpIcon />
+      </span>
     </button>
   </div>
 </div>

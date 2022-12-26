@@ -9,6 +9,10 @@ import {
   addDoc,
   getDocs,
   getDoc,
+  updateDoc,
+  arrayUnion,
+  query,
+  where,
 } from "firebase/firestore";
 import {
   getStorage,
@@ -98,12 +102,26 @@ async function getImageUrl(path: string): Promise<string> {
 export async function getChallenges(): Promise<any[]> {
   const challengesRef = collection(db, "challenges");
   const snapshot = await getDocs(challengesRef);
-  const docs = snapshot.docs.map((doc) => doc.data());
+  const docs = snapshot.docs.map((doc) => {
+    return {
+      id: doc.id,
+      data: doc.data(),
+    };
+  });
 
-  const images = await Promise.all(docs.map((doc) => getImageUrl(doc.image)));
-  const users = await Promise.all(docs.map((doc) => getUser(doc.createdBy)));
+  const images = await Promise.all(
+    docs.map(({ data }) => getImageUrl(data.image))
+  );
+  const users = await Promise.all(
+    docs.map(({ data }) => getUser(data.createdBy))
+  );
 
-  return docs.map((doc, i) => ({ ...doc, image: images[i], createdBy: users[i] }));
+  return docs.map(({ id, data }, i) => ({
+    ...data,
+    id,
+    image: images[i],
+    createdBy: users[i],
+  }));
 }
 
 export async function getUser(userId: string): Promise<any> {
@@ -111,9 +129,33 @@ export async function getUser(userId: string): Promise<any> {
   const userRef = doc(usersRef, userId);
   const doc_ = await getDoc(userRef);
 
-  if (doc_.exists()) {
-    return doc_.data();
+  if (!doc_.exists()) {
+    return null;
   }
 
-  return null;
+  return doc_.data();
+}
+
+export async function upvoteChallenge(challengeId: string) {
+  const userId = auth.currentUser?.uid;
+
+  if (!userId) {
+    throw new Error("User not logged in");
+  }
+  const challengesRef = collection(db, "challenges");
+  const challengeRef = doc(challengesRef, challengeId);
+  const doc_ = await getDoc(challengeRef);
+
+  if (!doc_.exists()) {
+    throw new Error("Challenge not found");
+  }
+  const data = doc_.data();
+  const upvotes = data.upvotes || [];
+
+  if (upvotes.includes(userId)) {
+    throw new Error("Challenge already upvoted");
+  }
+  await updateDoc(challengeRef, {
+    upvotes: arrayUnion(userId),
+  });
 }
