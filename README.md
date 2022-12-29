@@ -1,6 +1,7 @@
 # CodeNight Developers Challenge
 
 - API Integration
+
   - [Birru API](https://birru.onrender.com/)
   - [GIPHY API](https://developers.giphy.com/)
   - [OpenWeatherMap API](https://openweathermap.org/)
@@ -10,12 +11,14 @@
   - [Harry Potter API](https://hp-api.herokuapp.com/)
 
 - Applications could be Telegram Bots, Web Apps, Mobile Apps, CLI Apps
+
   - Ethiopian Calendar App
   - Arabic number to Geez number Converter
   - Managing expenses and creating a budget
   - Daily motivational quotes bot (as images, videos or just text)
 
 - CSS Challenge
+
   - Jebena in CSS
   - Gasha and Tore in CSS
   - Shemena pattern in CSS
@@ -23,6 +26,7 @@
 - Web Server API
 
 - Landing Page Design
+
   - Design a Landing Page for traveling to Ethiopia
   - A website that serves as a catalog for ethiopian artists
 
